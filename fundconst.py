@@ -1,4 +1,4 @@
-import const as cc
+import constant as cc
 reload(cc)
 
 c     = cc.Constant('c',     299792458,        'm/s',   'Speed of Light')

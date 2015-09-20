@@ -6,9 +6,11 @@
 
 in_m    = 0.0254
 mil_m   = 2.54e-5
+nm_m    = 1e-9
+um_m    = 1e-6
 mm_m    = 0.001
 cm_m    = 0.01
-km_m    = 1000
+km_m    = 1000.0
 mi_m    = 1609.34
 au_m    = 149597870700
 ly_m    = 9.4605284e15
@@ -16,9 +18,10 @@ ly_m    = 9.4605284e15
 mil_mm  = 0.0254
 mil_um  = 25.4
 
-
 m_in = 1.0/in_m
 m_mil = 1.0/mil_m
+m_nm  = 1e9
+m_um  = 1e6
 m_mm = 1000
 m_cm = 100
 m_km = 0.001
@@ -30,6 +33,8 @@ mm_mil = 1.0/mil_mm
 um_mil = 1.0/mil_um
 
 ############## V O L U M E ##################
+cc_l = 1e-3
+l_cc = 1e3
 l_m3 = 0.001
 gal_l = 3.78541
 m3_l = 1000
@@ -53,10 +58,12 @@ ev_j    = 1.60217662e-19
 hz_j    = 6.62607004e-34
 j_hz    = 1.0/hz_j
 j_ev    = 1.0/ev_j
+hz_ev   = hz_j * j_ev
+ev_hz   = 1.0/hz_ev
 
 ############ P R E S S U R E ################
-atm_torr = 760
-atm_pa   = 101325
+atm_torr = 760.0
+atm_pa   = 101325.0
 atm_bar  = 1.01325
 atm_mbar = 1013.25
 pa_torr = 0.00750061683
@@ -69,7 +76,11 @@ mbar_atm  = 1.0/atm_mbar
 torr_pa   = 1.0/pa_torr
 torr_mbar = 1.0/mbar_torr
 
+######## M A G N E T I C   F I E L D ########
+t_g       = 10000.0
+g_t       = 1.0/t_g
 
+########### T E M P E R A T U R E ###########
 def f_k(tf):
     return (5.0 * (tf + 459.67) /9.0)
 def f_c(tf):

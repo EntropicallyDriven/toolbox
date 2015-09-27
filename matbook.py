@@ -1,10 +1,12 @@
+index = ['Al',
+         'Cu',
+         'Cu_Be',
+         'Cu_OFE',
+        ]
+
 class Mat:
 
     def __init__(self, matname):
-
-        self.MB_INDEX = ['Al',
-                         'OFE_Cu',
-                         'BeCu']
 
         self.name         =     matname
 
@@ -41,14 +43,22 @@ class Mat:
             self._emis_ox     =     0.6
 
 
-        elif matname == 'OFE_Cu':
+        elif matname == 'Cu':
+            self._name = 'Normal Copper'
+
+            self._density     =     8960.0
+            self._specheat    =     385.0
+            self._resist      =     1.68e-8
+
+
+        elif matname == 'Cu_OFE':
             self._name = 'Oxygen Free Electronic Copper'
 
             self._density     =     8960.0
             self._specheat    =     385.0
 
 
-        elif matname == 'BeCu':
+        elif matname == 'Cu_Be':
             self._name = 'Beryllium Copper'
 
             self._density     =     8250.0
@@ -71,12 +81,7 @@ class Mat:
         for attr in data.keys():
             if data[attr] is None:
                 del data[attr]
-        del data['MB_INDEX']
         return data
-
-
-    def index(self):
-        return self.MB_INDEX
 
     @property
     def name(self):
@@ -94,7 +99,7 @@ class Mat:
             raise NoMatDataError(self._name,'density')
 
 
-    ###############  THERMCAL  ########################
+    ###############  THERMAL  ########################
     @property
     def specheat(self):
         if self._specheat is not None:

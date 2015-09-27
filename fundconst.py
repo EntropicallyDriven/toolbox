@@ -1,4 +1,6 @@
 import constant as cc
+import gc
+
 reload(cc)
 
 c     = cc.Constant('c',     299792458,        'm/s',      'Speed of Light')
@@ -20,3 +22,12 @@ gp    = cc.Constant('gp',    5.585694702,       ' ',       'Proton g-factor')
 gn    = cc.Constant('gn',   -3.82608545,        ' ',       'Neutron g-factor')
 muN   = cc.Constant('muN',   5.050783699e-27,   'J/T',     'Nuclear Magneton')
 R     = cc.Constant('R',     8.3144598,         'J/mol K', 'Molar Gas Constant')
+
+def index():
+    allconstants = []
+    for obj in gc.get_objects():
+        if isinstance(obj, cc.Constant):
+            allconstants.append(str(obj))
+    allconstants.sort()
+    for const in allconstants:
+        print(const)

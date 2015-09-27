@@ -7,7 +7,7 @@ class Constant:
 
     def __str__(self):
         val = '%e ' % self.value
-        string = self.name + ': ' + self.sym + ' = ' + val + self.unit
+        string = self.sym + '\t' + self.name + ': ' + self.sym + ' = ' + val + self.unit
         return string
 
 

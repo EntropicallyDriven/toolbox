@@ -1,6 +1,6 @@
 import re
 
-class Ptable:
+class ElemData:
     def __init__(self, element):
         elemname = element.lower()
 

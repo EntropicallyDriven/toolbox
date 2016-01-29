@@ -9,7 +9,10 @@ class Constant:
         val = '%e ' % self.value
         string = self.sym + '\t' + self.name + ': ' + self.sym + ' = ' + val + self.unit
         return string
-
+    def __repr__(self):
+        val = '%e ' % self.value
+        string = self.sym + '\t' + self.name + ': ' + self.sym + ' = ' + val + self.unit
+        return string
 
     def __add__(self, other):
         return self.value + other

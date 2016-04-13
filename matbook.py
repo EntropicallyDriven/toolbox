@@ -64,13 +64,14 @@ class Mat:
         self.specheat    =     data[2]    # J/kg
         self.condt       =     data[3]    # W/m K
         self.tmelt       =     data[4]    # K
-
+		
         ############  ELECTRICAL ########################
-        self.resist      =     data[5]    # Ohm m
+        self.conde       =	   data[5]    # S/m
+        self.resist      =     data[6]    # Ohm m
 
         ############   OPTICAL   ########################
-        self.emis_pol    =     data[6]
-        self.emis_ox     =     data[7]
+        self.emis_pol    =     data[7]
+        self.emis_ox     =     data[8]
 
 
     def __str__(self):

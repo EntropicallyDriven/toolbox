@@ -28,10 +28,7 @@ def allowed(cell,h,k,l):
         a1 = (h%2==0) and (k%2==0) and (l%2==0)
         a2 = (h%2==1) and (k%2==1) and (l%2==1)
         a3 = (h+k+l)%4==0
-        if a1:
-            return not a3
-        else:
-            return a1 or a2
+        return (a1 and a3) or a2
     elif cell=='H':
         a1 = (l%2==1)
         a2 = ((h+2*k)%3)==0

@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.cm as cm
 
 class Phase:
     def __init__(self,name,cell,a,b,c):

@@ -2,8 +2,6 @@ import re
 
 class ElemData:
     def __init__(self, element):
-        elemname = element.lower()
-
         elemdata = open(r'C:\Users\Joshua\Documents\Code\toolbox\elemdata.csv')
         alldata = elemdata.read()
         elemdata.close()
@@ -11,19 +9,10 @@ class ElemData:
         lines = alldata.split('\n')
         lines = lines[:-1]
 
-        names = []
-
-        for line in lines:
-            name = re.search('\A[^,]+',line)
-            name = name.group(0)
-            name = name.lower()
-            names.append(name)
-
-        if elemname in names:
-            index = names.index(elemname)
-        else:
-            index = names.index('unknown')
-
+        for ii,line in enumerate(lines):
+            if line.split(',')[0] == element:
+                index = ii
+                break
         data = lines[index]
 
         data = data.split(',')
@@ -36,9 +25,14 @@ class ElemData:
             if datum == '':
                 data[ii] = None
 
-        self.name         =     data[0]
-        self.num          =     float(data[1])
-        self.mass         =     float(data[2])    # kg
+        self.sym     =     data[0]
+        self.name    =     data[1]
+        self.num     =     int(data[2])
+        self.mass    =     float(data[3])    # amu
+        self.density =     float(data[4])    # g/cm3
+        self.tmelt   =     float(data[5])    # K
+        self.tboil   =     float(data[6])    # K
+        self.eneg    =     float(data[7])    # Pauling Scale
 
 
     def __str__(self):

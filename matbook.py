@@ -81,4 +81,4 @@ class Mat:
     def knowndata(self):
         for ii,datum in enumerate(self.data[1:]):
             if datum is not None:
-                print self.labels[ii+1] , '=', self.data[ii+1], ' ', self.units[ii+1]
+                print(self.labels[ii+1] , '=', self.data[ii+1], ' ', self.units[ii+1])

@@ -4,6 +4,7 @@ import matplotlib.cm as cm
 
 class Phase:
     def __init__(self,name,cell,a,b,c):
+        """Supported cell types: I, F, D, H"""
         self.a = a
         self.b = b
         self.c = c
@@ -37,7 +38,6 @@ def allowed(cell,h,k,l):
         return not (a1 or a2 or a3)
     else:
         return True
-
 
 
 
@@ -76,7 +76,7 @@ def spacings(phase,num, **kwargs):
 
         if allowed(phase.cell,h,k,l):
             if phase.cell=='H':
-                xx = 4*(h**2 + h*k + k^2)/(3*phase.a**2) + l**2/c**2
+                xx = 4*(h**2 + h*k + k**2)/(3*phase.a**2) + (l/phase.c)**2
             else:
                 xx = (h/phase.a)**2 + (k/phase.b)**2 + (l/phase.c)**2
             d = np.sqrt(1./xx)
@@ -107,6 +107,9 @@ def spacings(phase,num, **kwargs):
 def gelplot(data,phases,num, **kwargs):
     """Compare graphically some data (1/d) against some candidate phases"""
     allpeaks = {}
+    if type(phases) is not list:
+        phases = [phases]
+        
     for phase in phases:
         if 'dmin' in kwargs:
             indices, planes = spacings(phase,num,dmin=kwargs['dmin'])
@@ -120,13 +123,18 @@ def gelplot(data,phases,num, **kwargs):
     axes = plt.gca()
     cm_subsection = np.linspace(0, 1, numphases)
     colors = [ cm.jet(x) for x in cm_subsection ]
+    
+    if data is not None and len(data)>0:
+        plt.vlines(data,0,1,linestyle='--',linewidth = 2)
+        textstart = np.min(data)/2
+    else:
+        textstart = 0
 
-    plt.vlines(data,0,1,linestyle='--',linewidth = 2)
-
+    maxpeak = 0
     for ii,phase in enumerate(phases):
         indices = allpeaks[phase.name][0]
         planes = allpeaks[phase.name][1]
-
+        maxpeak = max(np.max(planes),maxpeak)
         offset = 0.2/numphases
         top = ((ii+1.0)/numphases) - offset
         bottom = (ii)/numphases + offset
@@ -138,9 +146,13 @@ def gelplot(data,phases,num, **kwargs):
                 plt.text(planes[jj],bottom-offset/2,indices[jj],color=colors[ii],backgroundcolor = 'w',ha='center')
             else:
                 plt.text(planes[jj],top+offset/4,indices[jj],color=colors[ii],backgroundcolor = 'w',ha='center')
-        plt.text(np.min(data)/2,(top+bottom)/2,'('+phase.name+')',color=colors[ii],fontsize = 18, ha='center')
-        plt.xlim(0,axes.get_xlim()[1]*1.05)
+        
+        if data is None or len(data)==0:
+            textstart = np.min(planes/2.)
+            
+        plt.text(textstart,(top+bottom)/2,'('+phase.name+')',color=colors[ii],fontsize = 18, ha='center')
 
-        plt.xlabel('Ring Spacing (1/nm)',fontsize = 18)
-
+        plt.xlabel('Peak Spacing (1/nm)',fontsize = 18)
+        plt.ylim(0,1)
+        plt.xlim(0,maxpeak*1.05)
         axes.get_yaxis().set_visible(False)

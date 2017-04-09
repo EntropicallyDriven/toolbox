@@ -82,7 +82,7 @@ def spacings(phase,num, **kwargs):
             d = np.sqrt(1./xx)
             if d not in planes:
                 planes.append(d)
-                indices.append("(%d%d%d)"%(h,k,l))
+                indices.append("(%d %d %d)"%(h,k,l))
                 ii+=1
 
     planes, indices = zip(*sorted(zip(planes, indices)))
@@ -106,6 +106,7 @@ def spacings(phase,num, **kwargs):
 
 def gelplot(data,phases,num, **kwargs):
     """Compare graphically some data (1/d) against some candidate phases"""
+    figsize = (10,5)
     allpeaks = {}
     if type(phases) is not list:
         phases = [phases]

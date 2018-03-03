@@ -1,5 +1,0 @@
-Units,Kg/ m^3,J/Kg K,W/m K,K,S/m,Ohm/m,(unitless),(unitless)
-Name,Density,Specific Heat,Thermal Conductivity,Melting Temperature,Electrical Conductivity,Electrical Resistivity,Emissivity--Polished,Emissivity--Oxidized
-aluminum,2700,902,,,3.77E+07,2.65E-08,0.03,0.6
-copper,8960,385,,1358,5.88E+07,1.70E-08,,
-gold,19320,129,314,1337,6.21E+07,1.61E-08,,
